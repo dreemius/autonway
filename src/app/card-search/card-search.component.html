@@ -1,0 +1,51 @@
+<div class="pl-5 pr-5 pt-5 pb-2">
+  <div class="input-group mb-3 pl-5 pr-5">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+    </div>
+    <input type="text" class="form-control" placeholder="Input text for search" (input)="onInput($event)" #searchInput>
+    <div class="input-group-append">
+      <span class="input-group-text" (click)="clear()"><i class="fas fa-broom"></i></span>
+    </div>
+  </div>
+</div>
+
+<div class="row pl-5 pr-5 pt-5 pb-2">
+  <div class="col-md-3 mb-3">
+    <label for="country">Тип кузова</label>
+    <select class="custom-select d-block w-100" id="type" required="">
+      <option value="">Выберите...</option>
+      <option>United States</option>
+    </select>
+    <div class="invalid-feedback">
+      Please select a valid country.
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <label for="state">Марка</label>
+    <select class="custom-select d-block w-100" id="brand" required="">
+      <option value="">Выберите...</option>
+      <option>California</option>
+    </select>
+    <div class="invalid-feedback">
+      Please provide a valid state.
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <label for="state">Модель</label>
+    <select class="custom-select d-block w-100" id="model" required="">
+      <option value="">Выберите...</option>
+      <option>California</option>
+    </select>
+    <div class="invalid-feedback">
+      Please provide a valid state.
+    </div>
+  </div>
+  <div class="col-md-2 mb-3">
+    <label for="zip">Год выпуска</label>
+    <input type="text" class="form-control" id="year" placeholder="" required="">
+    <div class="invalid-feedback">
+      Zip code required.
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<app-card-search (search)="filterPhotos($event)"></app-card-search>
+
+<div class="container mt-3">
+    <div class="row" *ngIf="photos">
+        <app-card class="col-md-4" *ngFor="let photo of photosForPage" [photo]="photo"></app-card>
+    </div>
+</div>
+
+<app-card-paging [pagingParams]="pagingParams" (onPageChanged)="pageChanged($event)"></app-card-paging>
