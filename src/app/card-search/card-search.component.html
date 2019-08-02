@@ -1,4 +1,4 @@
-<div class="pl-5 pr-5 pt-5 pb-2">
+<!-- <div class="pl-5 pr-5 pt-5 pb-2">
   <div class="input-group mb-3 pl-5 pr-5">
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
@@ -8,44 +8,59 @@
       <span class="input-group-text" (click)="clear()"><i class="fas fa-broom"></i></span>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="row pl-5 pr-5 pt-5 pb-2">
-  <div class="col-md-3 mb-3">
-    <label for="country">Тип кузова</label>
-    <select class="custom-select d-block w-100" id="type" required="">
-      <option value="">Выберите...</option>
-      <option>United States</option>
-    </select>
-    <div class="invalid-feedback">
-      Please select a valid country.
-    </div>
+  <div class="col-md-2"> </div>
+  <div class="col-md-8">
+
+    <form #searchForm="ngForm" autocomplete="off" (ngSubmit)="onSearch(searchForm)">
+      <div class="input-group mb-4">
+        <label for="country">Тип кузова</label>
+        <select class="custom-select d-block w-100" [(ngModel)]="selectedType" id="type" name="type" required>
+          <option *ngFor="let item of type" [value]=item.value>{{item.name}}</option>
+        </select>
+        <div class="invalid-feedback">
+          Пожалуйста, выберите тип кузова
+        </div>
+      </div>
+
+      <div class="input-group  mb-4">
+        <label for="state">Марка авто</label>
+        <select class="custom-select d-block w-100" [(ngModel)]="selectedBrand" id="brand" name="brand" required
+          (change)="onBrandChanged($event)">
+          <option *ngFor="let item of brand" [value]=item.value>{{item.name}}</option>
+        </select>
+        <div class="invalid-feedback">
+          Пожалуйста, выберите марку авто
+        </div>
+      </div>
+
+      <div class="input-group mb-4">
+        <label for="state">Модель</label>
+        <select class="custom-select d-block w-100" id="model" [(ngModel)]="selectedModel" name="model" required>
+          <option *ngFor="let item of model" [value]=item.value>{{item.name}}</option>
+        </select>
+        <div class="invalid-feedback">
+          Пожалуйста, выберите модель авто
+        </div>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="zip">Год выпуска</label>
+        <input class="form-control" id="year" [(ngModel)]="selectedYear" name="year" minlength="4" maxlength="4"
+          required #year="ngModel">
+
+        <div *ngIf="year.dirty && invalidYear" [ngClass]="{'d-block': invalidYear}" class="invalid-feedback">
+          Год выпуска не соответствует шаблону.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!searchForm.form.valid" class="btn btn-primary">Найти среднюю цену</button>
+      <!-- <button type="reset" [disabled]="searchForm.form.toched" class="btn btn-primary">Сброс</button> -->
+    </form>
+
   </div>
-  <div class="col-md-3 mb-3">
-    <label for="state">Марка</label>
-    <select class="custom-select d-block w-100" id="brand" required="">
-      <option value="">Выберите...</option>
-      <option>California</option>
-    </select>
-    <div class="invalid-feedback">
-      Please provide a valid state.
-    </div>
-  </div>
-  <div class="col-md-4 mb-3">
-    <label for="state">Модель</label>
-    <select class="custom-select d-block w-100" id="model" required="">
-      <option value="">Выберите...</option>
-      <option>California</option>
-    </select>
-    <div class="invalid-feedback">
-      Please provide a valid state.
-    </div>
-  </div>
-  <div class="col-md-2 mb-3">
-    <label for="zip">Год выпуска</label>
-    <input type="text" class="form-control" id="year" placeholder="" required="">
-    <div class="invalid-feedback">
-      Zip code required.
-    </div>
-  </div>
+  <div class="col-md-2"> </div>
+
 </div>

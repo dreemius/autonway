@@ -9,10 +9,11 @@ import { CardsListComponent } from './cards-list/cards-list.component';
 import { CardComponent } from './card/card.component';
 import { CardSearchComponent } from './card-search/card-search.component';
 import { CardPagingComponent } from './card-paging/card-paging.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, CardsListComponent, CardComponent, CardSearchComponent, CardPagingComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, SharedModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent]
 })

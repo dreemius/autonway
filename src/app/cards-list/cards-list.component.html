@@ -1,9 +1,38 @@
-<app-card-search (search)="filterPhotos($event)"></app-card-search>
+<app-card-search (search)="searchCars($event)"></app-card-search>
 
-<div class="container mt-3">
-    <div class="row" *ngIf="photos">
-        <app-card class="col-md-4" *ngFor="let photo of photosForPage" [photo]="photo"></app-card>
+<div class="container pt-7">
+
+    <div class="row">
+        <div class="col-md-2"> </div>
+        <div class="col-md-8">
+
+            <dl class="row" *ngIf="resultData">
+                <dt class="col-sm-10">Общее колличество объявлений</dt>
+                <dd class="col-sm-2">
+                    <p>{{resultData.total}}</p>
+                </dd>
+
+                <dt class="col-sm-10">Средняя арифметическая цена</dt>
+                <dd class="col-sm-2">
+                    <p>{{resultData.arithmeticMean}}</p>
+                </dd>
+
+                <dt class="col-sm-10">Среднее арифметическое между 1 и 4 квартилем</dt>
+                <dd class="col-sm-2">
+                    <p>{{resultData.interQuartileMean}}</p>
+                </dd>
+            </dl>
+
+        </div>
+        <div class="col-md-2"> </div>
     </div>
+
+    <div class="row">
+        <div></div>
+        <pre></pre>
+    </div>
+    <div *ngIf="noResult">No results</div>
 </div>
 
-<app-card-paging [pagingParams]="pagingParams" (onPageChanged)="pageChanged($event)"></app-card-paging>
+<!-- <app-card class="col-md-4" *ngFor="let photo of photosForPage" [photo]="photo"></app-card> -->
+<!-- <app-card-paging [pagingParams]="pagingParams" (onPageChanged)="pageChanged($event)"></app-card-paging> -->
