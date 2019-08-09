@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.autocompleter .autocomplete-container {
+    box-shadow: unset !important;
+    border: 1px solid #ced4da;
+    height: auto;
+}

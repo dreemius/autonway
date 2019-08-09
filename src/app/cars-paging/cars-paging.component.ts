@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, OnInit, Input, Output } from '@angular/core';
 
 @Component({
-    selector: 'app-card-paging',
-    templateUrl: './card-paging.component.html',
-    styleUrls: ['./card-paging.component.css']
+    selector: 'app-cars-paging',
+    templateUrl: './cars-paging.component.html',
+    styleUrls: ['./cars-paging.component.css']
 })
-export class CardPagingComponent implements OnInit {
+export class CarsPagingComponent implements OnInit {
     @Input() pagingParams: any;
     @Output() onPageChanged = new EventEmitter<any>();
     

@@ -1,32 +1,21 @@
-<!-- <div class="pl-5 pr-5 pt-5 pb-2">
-  <div class="input-group mb-3 pl-5 pr-5">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-    </div>
-    <input type="text" class="form-control" placeholder="Input text for search" (input)="onInput($event)" #searchInput>
-    <div class="input-group-append">
-      <span class="input-group-text" (click)="clear()"><i class="fas fa-broom"></i></span>
-    </div>
-  </div>
-</div> -->
-
 <div class="row pl-5 pr-5 pt-5 pb-2">
-  <div class="col-md-2"> </div>
-  <div class="col-md-8">
+  <div class="col-md-3"> </div>
+  <div class="col-md-6">
 
     <form #searchForm="ngForm" autocomplete="off" (ngSubmit)="onSearch(searchForm)">
-      <div class="input-group mb-4">
+      <div class="input-group mb-4" *ngIf="type">
         <label for="country">Тип кузова</label>
         <select class="custom-select d-block w-100" [(ngModel)]="selectedType" id="type" name="type" required>
-          <option *ngFor="let item of type" [value]=item.value>{{item.name}}</option>
+          <option *ngFor="let item of type; let i = index" [value]=item.value>{{item.name}}
+          </option>
         </select>
         <div class="invalid-feedback">
           Пожалуйста, выберите тип кузова
         </div>
       </div>
 
-      <div class="input-group  mb-4">
-        <label for="state">Марка авто</label>
+      <!-- <div class="input-group  mb-4">
+        <label for="brand">Марка авто</label>
         <select class="custom-select d-block w-100" [(ngModel)]="selectedBrand" id="brand" name="brand" required
           (change)="onBrandChanged($event)">
           <option *ngFor="let item of brand" [value]=item.value>{{item.name}}</option>
@@ -34,7 +23,33 @@
         <div class="invalid-feedback">
           Пожалуйста, выберите марку авто
         </div>
+      </div> -->
+
+      <div class="input-group  mb-4">
+        <label for="state">Марка авто</label><br>
+        <div class="autocompleter">
+          <ng-autocomplete 
+            [data]="brand"
+            [searchKeyword]="keyword"
+            placeHolder="Выберите марку машины"
+            (selected)='onBrandChanged($event)'
+            historyIdentifier="brand"
+            historyListMaxNumber="10"
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">                                 
+          </ng-autocomplete>
+           
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+           
+          <ng-template #notFoundTemplate let-notFound>
+            <div>Машина не нейдена</div>
+          </ng-template>
+        </div>
+
       </div>
+
 
       <div class="input-group mb-4">
         <label for="state">Модель</label>
@@ -45,6 +60,17 @@
           Пожалуйста, выберите модель авто
         </div>
       </div>
+
+      <div class="input-group mb-4" *ngIf="type">
+          <label for="country">Тип топлива</label>
+          <select class="custom-select d-block w-100" [(ngModel)]="selectedFuel" id="fuel" name="fuel" required>
+            <option *ngFor="let item of fuel; let i = index" [value]=item.value>{{item.name}}
+            </option>
+          </select>
+          <div class="invalid-feedback">
+            Пожалуйста, выберите тип топлива
+          </div>
+        </div>
 
       <div class="form-group mb-4">
         <label for="zip">Год выпуска</label>
@@ -61,6 +87,6 @@
     </form>
 
   </div>
-  <div class="col-md-2"> </div>
+  <div class="col-md-3"> </div>
 
 </div>

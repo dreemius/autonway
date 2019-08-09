@@ -5,16 +5,30 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { CardsListComponent } from './cards-list/cards-list.component';
-import { CardComponent } from './card/card.component';
-import { CardSearchComponent } from './card-search/card-search.component';
-import { CardPagingComponent } from './card-paging/card-paging.component';
+import { CarsListComponent } from './cars-list/cars-list.component';
+import { CarComponent } from './car/car.component';
+import { CarSearchComponent } from './cars-search/cars-search.component';
+import { CarsPagingComponent } from './cars-paging/cars-paging.component';
 import { FormsModule } from '@angular/forms';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
-  declarations: [AppComponent, CardsListComponent, CardComponent, CardSearchComponent, CardPagingComponent],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule, SharedModule],
+  declarations: [
+    AppComponent, 
+    CarsListComponent, 
+    CarComponent, 
+    CarSearchComponent, 
+    CarsPagingComponent
+  ],
+  imports: [
+    BrowserModule, 
+    FormsModule, 
+    AppRoutingModule, 
+    HttpClientModule, 
+    SharedModule, 
+    AutocompleteLibModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

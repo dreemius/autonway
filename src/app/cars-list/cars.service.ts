@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CardsService {
+export class CarsService {
 
   constructor(private http: HttpClient) {
   }

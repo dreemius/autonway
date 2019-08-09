@@ -1,5 +1,6 @@
 .site-header {
-    background-color: rgba(204, 204, 204, 0.85);
+    background-color: #000000d9;
+    color: white;
 }
 
 .site-header a {

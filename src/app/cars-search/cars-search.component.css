@@ -1,0 +1,7 @@
+.autocompleter {
+    width: 100%
+}
+
+.autocompleter .autocomplete-container {
+    box-shadow: 0px;
+}

@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector   : 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls  : ['./card.component.css']
+  selector   : 'app-car',
+  templateUrl: './car.component.html',
+  styleUrls  : ['./car.component.css']
 })
-export class CardComponent implements OnInit {
+export class CarComponent implements OnInit {
   @Input() photo: any;
   date = Date.now();
   constructor() {
