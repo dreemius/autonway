@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector   : 'app-car',
+  selector   : 'car-info',
   templateUrl: './car.component.html',
   styleUrls  : ['./car.component.css']
 })
 export class CarComponent implements OnInit {
-  @Input() photo: any;
+  @Input() carInfo: any;
   date = Date.now();
   constructor() {
   }

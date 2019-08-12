@@ -3,7 +3,7 @@
   <div class="col-md-6">
 
     <form #searchForm="ngForm" autocomplete="off" (ngSubmit)="onSearch(searchForm)">
-      <div class="input-group mb-4" *ngIf="type">
+      <div class="input-group mb-4" *ngIf="false">
         <label for="country">Тип кузова</label>
         <select class="custom-select d-block w-100" [(ngModel)]="selectedType" id="type" name="type" required>
           <option *ngFor="let item of type; let i = index" [value]=item.value>{{item.name}}
@@ -35,14 +35,14 @@
             (selected)='onBrandChanged($event)'
             historyIdentifier="brand"
             historyListMaxNumber="10"
+            historyHeading="Недавно выбранные"
             [itemTemplate]="itemTemplate"
             [notFoundTemplate]="notFoundTemplate">                                 
           </ng-autocomplete>
            
           <ng-template #itemTemplate let-item>
             <a [innerHTML]="item.name"></a>
-          </ng-template>
-           
+          </ng-template>         
           <ng-template #notFoundTemplate let-notFound>
             <div>Машина не нейдена</div>
           </ng-template>

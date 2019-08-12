@@ -1,7 +1,6 @@
 <app-cars-search (search)="searchCars($event)"></app-cars-search>
 
-
-<div *ngIf="!noResult" class="row">
+<div *ngIf="!noResults" class="row">
     <div class="col-md-3"> </div>
     <div class="col-md-6 p-5">
 
@@ -14,57 +13,34 @@
             <dt class="col-sm-2">
                 <p>{{resultData.arithmeticMean | currency:'USD':'symbol':'4.0-0'}}</p>
             </dt>
-            <dd class="col-sm-10">Среднее арифметическое между 1 и 4 квартилем:</dd>
+            <dd class="col-sm-10">Среднее арифметическое между 1 и 4 квартилем:
+                <span class="badge badge-primary" placement="top"
+                    ngbTooltip="Среднее арифметическое без учета 25% самых дешевых и самых дорогих цен.">?</span>
+            </dd>
             <dt class="col-sm-2">
                 {{resultData.interQuartileMean | currency:'USD':'symbol':'4.0-0'}}
             </dt>
         </dl>
-        <pre>{{ rowResult | json }}</pre>
     </div>
     <div class="col-md-3"> </div>
 </div>
 
-<div *ngIf="noResult" class="row">
+<div *ngIf="noResults" class="row m-5">
     <pre></pre>
-    <h2>По задданому запросу объявления не найдены</h2>
-</div>
-
-
-<div class="container my-5">
-<div class="row">
-    <h3>Объявления с ценой, которая близка к средней</h3>
-    <div class="card-deck -2 mt-2">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
+    <div class="alert alert-danger mx-auto" role="alert">
+        <div>По задданому запросу объявления не найдены</div>
     </div>
-
-
 </div>
+
+<div class="container" *ngIf="!noResults">
+    <div class="row mb-5">
+        <h3 class="mx-auto">Показано {{loadedCarsCount}} объявления с ценой, которая близка к средней</h3>
+    </div>
+    <div class="row">
+        <car-info class="col-md-6" *ngFor="let car of carsList" [carInfo]="car"></car-info>
+    </div>
 </div>
+
 
 <!-- <app-car class="col-md-4" *ngFor="let photo of photosForPage" [photo]="photo"></app-car> -->
 <!-- <app-cars-paging [pagingParams]="pagingParams" (onPageChanged)="pageChanged($event)"></app-cars-paging> -->

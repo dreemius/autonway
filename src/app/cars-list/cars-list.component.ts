@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CarsService } from './cars.service';
+import { CarsListService } from './cars-list.service';
 import { HttpClient } from '@angular/common/http';
+//import { Observable, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-cars-list',
@@ -8,34 +9,48 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./cars-list.component.css']
 })
 export class CarsListComponent implements OnInit {
-  private apiKey: string = '4MhHmkWSVc1tdOYdKcrlx0ZDYVxI4eN67I6D5Yok';
   private noResults: boolean = false;
   private resultData: { [key: string]: any };
   private rowResult: { [key: string]: any };
   private priceMap: [];
+  private loadedCarsCount: number;
+  carsList: any[];
 
   constructor(
-    private service: CarsService,
-    private http: HttpClient
+    private carsListService: CarsListService,
   ) { }
 
   ngOnInit() {
   }
 
   searchCars(searchParams: { [key: string]: any }): void {
-    this.http.get(`https://developers.ria.com/auto/average_price?api_key=${this.apiKey}&bodystyle=${searchParams.type}&marka_id=${searchParams.brand}&model_id=${searchParams.model}&yers=${searchParams.year}&fuel_id=${searchParams.fuel}`).subscribe((result: any) => {
-      if (!result || (result && result.total === 0)) {
-        this.noResults = true;
-        return;
-      }
+    this.clearValues()
+    this.carsListService.getAveragePrice(searchParams).subscribe((result: any) => {
+      this.validateResult(result);
       this.setData(result);
       this.sortPrice();
-      let meanIndex = this.findItemCloseToMean();
-      this.loadSiblingsCars(meanIndex)
+      this.loadSiblingsCars(this.findItemCloseToAverage());
     })
   }
+  
+  validateResult(result: any): boolean {
+    if (!result || (result && result.total === 0)) {
+      this.noResults = true;
+      return false;
+    } else {
+      this.noResults = false;
+      return true;
+    }
+  }
 
-  setData(result: any) {
+  clearValues(): void {
+    this.resultData = {};
+    this.rowResult = [];
+    this.priceMap = [];
+    this.carsList = [];
+  }
+
+  setData(result: any): void {
     this.resultData = {
       total: Math.round(result.total),
       arithmeticMean: Math.round(result.arithmeticMean),
@@ -51,7 +66,7 @@ export class CarsListComponent implements OnInit {
     this.priceMap.sort((a: any, b: any) => { return a[0] - b[0] });
   }
 
-  findItemCloseToMean(): number {
+  findItemCloseToAverage(): number {
     let minDiff = Infinity;
     let priceIndex = 0;
 
@@ -66,16 +81,11 @@ export class CarsListComponent implements OnInit {
     return priceIndex;
   }
 
-  loadSiblingsCars(meanIndex: number) {
-
-    for (let i = meanIndex - 5; i <= meanIndex + 5; i++) {
-      console.log(this.priceMap[i])
-    }
-
-    // let id = this.rowResult.classifieds[10]
-    // this.http.get(`https://developers.ria.com/auto/info?api_key=${this.apiKey}&auto_id=${id}`).subscribe(result => {
-    //   console.log(result);
-    // })
+  loadSiblingsCars(averagePriceIndex: number): void {
+    this.carsListService.loadSiblingsCars(averagePriceIndex, this.priceMap).subscribe(result => {
+      this.loadedCarsCount = result.length;
+      this.carsList = result;
+    })
   }
 
 }

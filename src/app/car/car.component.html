@@ -1,13 +1,38 @@
-<div class="card mb-4 shadow-sm">
-  <img class="bd-placeholder-img card-img-top" width="100%" height="225" [src]="photo.url">
+<div class="card shadow mb-4">
+  <img class="bd-placeholder-img card-img-top" width="100%" height="" [src]="carInfo.photoData.seoLinkF">
   <div class="card-body">
-    <p class="card-text">{{photo.title}}</p>
+    <p class="card-title">{{carInfo.title}}</p>
+    <dl class="row">
+      <dt class="col-sm-3">Цена:</dt>
+      <dd class="col-sm-9">{{carInfo.USD}}$</dd>
+
+      <dt class="col-sm-3">Год:</dt>
+      <dd class="col-sm-9">{{carInfo.autoData.year}}</dd>
+
+      <dt class="col-sm-3">Пробег:</dt>
+      <dd class="col-sm-9">{{carInfo.autoData.race}}</dd>
+
+      <dt class="col-sm-3">Топливо:</dt>
+      <dd class="col-sm-9">{{carInfo.autoData.fuelName}}</dd>
+
+      <dt class="col-sm-3">Двигатель:</dt>
+      <dd class="col-sm-9">{{carInfo.autoData.gearboxName}}</dd>
+    </dl>
+    <!-- <p class="card-subtitle pb-1"><b>Цена:</b> {{carInfo.USD}}$</p>
+    <p class="card-subtitle pb-1"><b>Год:</b> {{carInfo.autoData.year}}</p>
+    <p class="card-subtitle pb-1"><b>Пробег:</b> {{carInfo.autoData.race}}</p>
+    <p class="card-subtitle pb-1"><b>Топливо:</b> {{carInfo.autoData.fuelName}}</p>
+    <p class="card-subtitle pb-1"><b>Двигатель:</b> {{carInfo.autoData.gearboxName}}</p> -->
+    <p class="card-text">{{carInfo.autoData.description}}</p>
+
+    <p class="card-text"><small class="text-muted">Объявление добавлено: {{carInfo.addDate | date:'dd.MM.yy'}}</small>
+    </p>
+
     <div class="d-flex justify-content-between align-items-center">
       <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+        <a href="https://auto.ria.com{{carInfo.linkToView}}" target="_blank" class="btn btn-success btn-lg">Открыть
+          объявление</a>
       </div>
-      <small class="text-muted">{{date | date}}</small>
     </div>
   </div>
 </div>
