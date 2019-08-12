@@ -9,15 +9,15 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./cars-list.component.css']
 })
 export class CarsListComponent implements OnInit {
-  private noResults: boolean = false;
-  private resultData: { [key: string]: any };
-  private rowResult: { [key: string]: any };
-  private priceMap: [];
-  private loadedCarsCount: number;
+  public noResults: boolean = false;
+  public resultData: { [key: string]: any };
+  public rowResult: { [key: string]: any };
+  public priceMap: [];
+  public loadedCarsCount: number;
   carsList: any[];
 
   constructor(
-    private carsListService: CarsListService,
+    public carsListService: CarsListService,
   ) { }
 
   ngOnInit() {

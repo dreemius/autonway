@@ -31,8 +31,7 @@
         <div>По задданому запросу объявления не найдены</div>
     </div>
 </div>
-
-<div class="container" *ngIf="!noResults">
+<div class="container" *ngIf="carsList && carsList.length>0">
     <div class="row mb-5">
         <h3 class="mx-auto">Показано {{loadedCarsCount}} объявления с ценой, которая близка к средней</h3>
     </div>

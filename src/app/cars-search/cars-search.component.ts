@@ -9,10 +9,10 @@ import { CarsSearchService } from './cars-search.service';
 })
 export class CarSearchComponent implements OnInit {
   @Output() search = new EventEmitter<any>();
-  private type: any;
-  private brand: any;
-  private model: any
-  private fuel: any
+  public type: any;
+  public brand: any;
+  public model: any
+  public fuel: any
 
   selectedType: any;
   selectedBrand: any;
