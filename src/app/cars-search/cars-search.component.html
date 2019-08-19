@@ -82,6 +82,11 @@
         </div>
       </div>
 
+      <div class="form-group form-check mb-4">
+        <input type="checkbox" [(ngModel)]="isCustom" name="custom" class="form-check-input" id="custom">
+        <label class="form-check-label" for="custom">Авто растаможено?</label>
+      </div>
+
       <button type="submit" [disabled]="!searchForm.form.valid" class="btn btn-primary">Найти среднюю цену</button>
       <!-- <button type="reset" [disabled]="searchForm.form.toched" class="btn btn-primary">Сброс</button> -->
     </form>

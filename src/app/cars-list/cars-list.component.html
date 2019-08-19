@@ -1,42 +1,60 @@
 <app-cars-search (search)="searchCars($event)"></app-cars-search>
 
-<div *ngIf="!noResults" class="row">
+<div *ngIf="noResults && !loading" class="row m-5">
+    <div class="alert alert-danger mx-auto" role="alert">
+        <div>По задданому запросу объявления не найдены</div>
+    </div>
+</div>
+
+<div *ngIf="loading" class="row">
+    <div class="col-md-12">
+        <img class="loader mx-auto" src="/assets/loader.gif" alt="loading">
+    </div>
+</div>
+
+<div *ngIf="!noResults && !loading" class="row">
     <div class="col-md-3"> </div>
     <div class="col-md-6 p-5">
 
-        <dl class="row bg-light border rounded-lg p-4" *ngIf="resultData">
+        <dl class="row bg-light border rounded-lg p-3" *ngIf="resultValues">
             <dd class="col-sm-10">Общее колличество объявлений:</dd>
             <dt class="col-sm-2">
-                <p>{{resultData.total}}</p>
+                <p>{{resultValues.total}}</p>
             </dt>
             <dd class="col-sm-10">Средняя арифметическая цена:</dd>
             <dt class="col-sm-2">
-                <p>{{resultData.arithmeticMean | currency:'USD':'symbol':'4.0-0'}}</p>
+                <p>{{resultValues.arithmeticMean | currency:'USD':'symbol':'4.0-0'}}</p>
             </dt>
             <dd class="col-sm-10">Среднее арифметическое между 1 и 4 квартилем:
                 <span class="badge badge-primary" placement="top"
                     ngbTooltip="Среднее арифметическое без учета 25% самых дешевых и самых дорогих цен.">?</span>
             </dd>
             <dt class="col-sm-2">
-                {{resultData.interQuartileMean | currency:'USD':'symbol':'4.0-0'}}
+                <p>{{resultValues.interQuartileMean | currency:'USD':'symbol':'4.0-0'}}</p>
+            </dt>
+            <dd class="col-sm-10">Средний пробег (на основе {{carsList.length}} загруженных автомобилей):
+            </dd>
+            <dt class="col-sm-2">
+                {{averageMileage}} тыс. км
             </dt>
         </dl>
     </div>
     <div class="col-md-3"> </div>
 </div>
 
-<div *ngIf="noResults" class="row m-5">
-    <pre></pre>
-    <div class="alert alert-danger mx-auto" role="alert">
-        <div>По задданому запросу объявления не найдены</div>
-    </div>
-</div>
 <div class="container" *ngIf="carsList && carsList.length>0">
-    <div class="row mb-5">
-        <h3 class="mx-auto">Показано {{loadedCarsCount}} объявления с ценой, которая близка к средней</h3>
+
+    <div class="row mb-5" *ngIf="twoCheapestCar">
+        <h3 class="col-md-12 mx-auto">Объявления с самой низкой ценой</h3>
     </div>
     <div class="row">
-        <car-info class="col-md-6" *ngFor="let car of carsList" [carInfo]="car"></car-info>
+        <car-info class="col-md-6" *ngFor="let car of twoCheapestCar" [carInfo]="car"></car-info>
+    </div>
+    <div class="row mb-5">
+        <h3 class="col-md-12 mx-auto">Показано {{visibleCarsCount}} объявления с ценой, которая близка к средней</h3>
+    </div>
+    <div class="row">
+        <car-info class="col-md-6" *ngFor="let car of visibleCarsList" [carInfo]="car"></car-info>
     </div>
 </div>
 

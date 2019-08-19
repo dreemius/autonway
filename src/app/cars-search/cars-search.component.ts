@@ -19,6 +19,7 @@ export class CarSearchComponent implements OnInit {
   selectedModel: any;
   selectedYear: any;
   selectedFuel: any;
+  isCustom: boolean = true;
   invalidYear: boolean = false;
   keyword = 'name';
 
@@ -66,7 +67,8 @@ export class CarSearchComponent implements OnInit {
       brand: this.selectedBrand,
       model: this.selectedModel,
       year: this.selectedYear,
-      fuel: this.selectedFuel
+      fuel: this.selectedFuel,
+      custom: this.isCustom ? 0 : 1
     }
   }
 
